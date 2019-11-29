@@ -1,8 +1,8 @@
 {
-  "name": "msdn-vs-code-extension",
-  "displayName": "msdn-vs-code-extension",
-  "description": "Extension with MSDN support for Visual Studio Code",
-  "version": "0.0.1",
+  "name": "let-find-vs-code-extension",
+  "displayName": "let-find-vs-code-extension",
+  "description": "Extension with the search support for Visual Studio Code",
+  "version": "0.0.2",
   "engines": {
     "vscode": "^1.40.0"
   },
@@ -17,7 +17,7 @@
     "commands": [
       {
         "command": "extension.find",
-        "title": "MSDN Find"
+        "title": "Let find"
       }
     ]
   },
