@@ -1,15 +1,43 @@
-import * as vscode from 'vscode';
+import * as vscode from "vscode";
+import { openBrowser } from "./helpers/browser.helper";
+import { findCommand } from "./helpers/extension.helper";
+import { log } from "./helpers/log.helper";
+import Dictionary from "./helpers/dictionary.helper";
 
 export function activate(context: vscode.ExtensionContext) {
+  log(Dictionary.extensionIsActive);
 
-	console.log('Congratulations, your extension "msdn-vs-code-extension" is now active!');
+  let disposable = vscode.commands.registerCommand("extension.find", () => {
+    vscode.window.showInformationMessage(Dictionary.startMessage);
 
-	let disposable = vscode.commands.registerCommand('extension.find', () => {
+    const browser = vscode.extensions.getExtension(
+      Dictionary.browserExtensionName
+    );
 
-		vscode.window.showInformationMessage('Start find something right now!');
-	});
+    const extensionActivated = () => {
+      log(Dictionary.extensionHasActived);
+      findCommand(vscode);
+      runBrowser();
+    };
 
-	context.subscriptions.push(disposable);
+    const extensionFailed = () => {
+      log(Dictionary.extensionHasFailed);
+    };
+
+    const runBrowser = (url: string = Dictionary.defaultUrl) => {
+      openBrowser(vscode, url);
+    };
+
+    if (browser) {
+      if (browser.isActive == false) {
+        browser.activate().then(extensionActivated, extensionFailed);
+      } else {
+        runBrowser();
+      }
+    }
+  });
+
+  context.subscriptions.push(disposable);
 }
 
 export function deactivate() {}
