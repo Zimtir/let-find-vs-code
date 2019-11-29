@@ -1,10 +1,89 @@
+import { checkString } from "./common.helper";
+import { log } from "./log.helper";
+import Dictionary from "./dictionary.helper";
+import * as request from "request-promise-native";
+import { openBrowser } from "./browser.helper";
+
 export const findCommand = (vscode: any) => {
   vscode.commands.getCommands(true).then(
     (cmds: any) => {
-      console.log("success");
+      log("success");
     },
     () => {
-      console.log("failed");
+      log("failed");
     }
   );
+};
+
+export const promptWithSearch = async (vscode: any) => {
+  const alreadySelectedText = getSelectedText(vscode);
+
+  const query = await vscode.window.showInputBox({
+    ignoreFocusOut: alreadySelectedText === "",
+    placeHolder: Dictionary.firstBoxPlaceholder,
+    value: alreadySelectedText,
+    valueSelection: [0, alreadySelectedText.length + 1]
+  });
+
+  await search(vscode, query!);
+};
+
+export const search = async (vscode: any, query: string) => {
+  if (checkString(query)) {
+    log(`${Dictionary.startQuery} ${query}`);
+
+    const palleteOptions = [
+      { title: `🔎 Search MSDN: ${query}`, url: "" },
+      {
+        title: `🔎 Search Google: ${query}`,
+        url: `https://www.google.com/search?q=${encodeURIComponent(query)}`
+      }
+    ];
+
+    // TODO (Parser): Add the call of the request
+
+    const selectedTitle = await vscode.window.showQuickPick(
+      palleteOptions.map(po => po.title),
+      { canPickMany: false }
+    );
+
+    const selectedPallete = palleteOptions.find(
+      po => po.title === selectedTitle
+    );
+    if (selectedPallete) {
+      openBrowser(vscode, selectedPallete.url);
+    }
+  }
+
+  return;
+};
+
+export const getSelectedText = (vscode: any): string => {
+  const editor = vscode.window.activeTextEditor;
+  if (!editor) {
+    return "";
+  }
+
+  const document = editor.document;
+  const eol = document.eol === 1 ? "\n" : "\r\n";
+  let result: string = "";
+  const selectedTextLines = editor.selections.map((selection: any) => {
+    if (
+      selection.start.line === selection.end.line &&
+      selection.start.character === selection.end.character
+    ) {
+      const range = document.lineAt(selection.start).range;
+      const text = editor.document.getText(range);
+      return `${text}${eol}`;
+    }
+
+    return editor.document.getText(selection);
+  });
+
+  if (selectedTextLines.length > 0) {
+    result = selectedTextLines[0];
+  }
+
+  result = result.trim();
+  return result;
 };

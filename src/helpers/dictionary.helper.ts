@@ -4,7 +4,9 @@ enum Dictionary {
   extensionHasFailed = "Extension activation failed",
   startMessage = "Start find something right now!",
   browserExtensionName = "auchenberg.vscode-browser-preview",
-  defaultUrl = "https://msdn.microsoft.com"
+  defaultUrl = "https://msdn.microsoft.com",
+  startQuery = "Search started for",
+  firstBoxPlaceholder = "Enter your question here"
 }
 
 export default Dictionary;

@@ -1,43 +1,56 @@
 import * as vscode from "vscode";
 import { openBrowser } from "./helpers/browser.helper";
-import { findCommand } from "./helpers/extension.helper";
+import {
+  findCommand,
+  search,
+  getSelectedText,
+  promptWithSearch
+} from "./helpers/extension.helper";
 import { log } from "./helpers/log.helper";
 import Dictionary from "./helpers/dictionary.helper";
 
-export function activate(context: vscode.ExtensionContext) {
+export const activate = (context: vscode.ExtensionContext) => {
   log(Dictionary.extensionIsActive);
 
-  let disposable = vscode.commands.registerCommand("extension.find", () => {
-    vscode.window.showInformationMessage(Dictionary.startMessage);
+  const extensionFind = vscode.commands.registerCommand(
+    "extension.find",
+    async () => {
+      vscode.window.showInformationMessage(Dictionary.startMessage);
 
-    const browser = vscode.extensions.getExtension(
-      Dictionary.browserExtensionName
-    );
+      const browser = vscode.extensions.getExtension(
+        Dictionary.browserExtensionName
+      );
 
-    const extensionActivated = () => {
-      log(Dictionary.extensionHasActived);
-      findCommand(vscode);
-      runBrowser();
-    };
+      const extensionActivated = () => {
+        log(Dictionary.extensionHasActived);
+        findCommand(vscode);
+      };
 
-    const extensionFailed = () => {
-      log(Dictionary.extensionHasFailed);
-    };
+      const extensionFailed = () => {
+        log(Dictionary.extensionHasFailed);
+      };
 
-    const runBrowser = (url: string = Dictionary.defaultUrl) => {
-      openBrowser(vscode, url);
-    };
+      if (browser) {
+        if (browser.isActive == false) {
+          browser.activate().then(extensionActivated, extensionFailed);
+        } else {
+        }
 
-    if (browser) {
-      if (browser.isActive == false) {
-        browser.activate().then(extensionActivated, extensionFailed);
-      } else {
-        runBrowser();
+        await promptWithSearch(vscode);
       }
     }
-  });
+  );
 
-  context.subscriptions.push(disposable);
-}
+  const extensionSearchBySelection = vscode.commands.registerCommand(
+    "extension.searchBySelection",
+    async () => {
+      const query = getSelectedText(vscode);
+      await search(vscode, query);
+    }
+  );
+
+  context.subscriptions.push(extensionFind);
+  context.subscriptions.push(extensionSearchBySelection);
+};
 
 export function deactivate() {}
