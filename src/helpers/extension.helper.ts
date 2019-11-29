@@ -3,6 +3,8 @@ import { log } from "./log.helper";
 import Dictionary from "./dictionary.helper";
 import * as request from "request-promise-native";
 import { openBrowser } from "./browser.helper";
+import Source from "../interfaces/source.interface";
+import { getSources } from "./source.helper";
 
 export const findCommand = (vscode: any) => {
   vscode.commands.getCommands(true).then(
@@ -32,13 +34,7 @@ export const search = async (vscode: any, query: string) => {
   if (checkString(query)) {
     log(`${Dictionary.startQuery} ${query}`);
 
-    const palleteOptions = [
-      { title: `🔎 Search MSDN: ${query}`, url: "" },
-      {
-        title: `🔎 Search Google: ${query}`,
-        url: `https://www.google.com/search?q=${encodeURIComponent(query)}`
-      }
-    ];
+    const palleteOptions: Source[] = getSources(query);
 
     // TODO (Parser): Add the call of the request
 
