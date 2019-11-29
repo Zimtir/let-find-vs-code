@@ -13,3 +13,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 - Add browser support
 - Add google support
 - Rename project
+
+## [0.0.3]
+
+- Add title parse

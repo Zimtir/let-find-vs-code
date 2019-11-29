@@ -35,8 +35,27 @@ export const search = async (vscode: any, query: string) => {
     log(`${Dictionary.startQuery} ${query}`);
 
     const sources: Source[] = getSources(query);
+    const subsources: Source[] = [];
 
     // TODO (Parser): Add the call of the request
+    const sourcePromises = sources.map(async source => {
+      try {
+        if (source.find) {
+          const sourceResponses = await source.find(query);
+          if (sourceResponses) {
+            sourceResponses.map((sourceResponse: Source) => {
+              subsources.push(sourceResponse);
+            });
+          }
+        }
+      } catch (err) {
+        log(err);
+      }
+    });
+
+    await Promise.all(sourcePromises);
+
+    sources.push(...subsources);
 
     const selectedTitle = await vscode.window.showQuickPick(
       sources.map(source => source.title),

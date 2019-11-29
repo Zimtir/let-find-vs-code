@@ -7,4 +7,8 @@ export default class GoogleModel implements Source {
   }
   title: string;
   url: string;
+
+  find: (query: string) => Promise<Source[]> = async (query: string) => {
+    return [];
+  };
 }

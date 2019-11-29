@@ -2,7 +2,7 @@
   "name": "let-find-vs-code-extension",
   "displayName": "let-find-vs-code-extension",
   "description": "Extension with the search support for Visual Studio Code",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "engines": {
     "vscode": "^1.40.0"
   },
@@ -72,6 +72,7 @@
   },
   "dependencies": {
     "@types/request-promise-native": "^1.0.17",
+    "axios": "^0.19.0",
     "request-promise-native": "^1.0.8"
   }
 }
