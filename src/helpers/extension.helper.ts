@@ -34,20 +34,21 @@ export const search = async (vscode: any, query: string) => {
   if (checkString(query)) {
     log(`${Dictionary.startQuery} ${query}`);
 
-    const palleteOptions: Source[] = getSources(query);
+    const sources: Source[] = getSources(query);
 
     // TODO (Parser): Add the call of the request
 
     const selectedTitle = await vscode.window.showQuickPick(
-      palleteOptions.map(po => po.title),
+      sources.map(source => source.title),
       { canPickMany: false }
     );
 
-    const selectedPallete = palleteOptions.find(
-      po => po.title === selectedTitle
+    const selectedSource = sources.find(
+      source => source.title === selectedTitle
     );
-    if (selectedPallete) {
-      openBrowser(vscode, selectedPallete.url);
+
+    if (selectedSource) {
+      openBrowser(vscode, selectedSource.url);
     }
   }
 

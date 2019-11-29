@@ -41,8 +41,8 @@ export const activate = (context: vscode.ExtensionContext) => {
     }
   );
 
-  const extensionSearchBySelection = vscode.commands.registerCommand(
-    "extension.searchBySelection",
+  const extensionFindBySelection = vscode.commands.registerCommand(
+    "extension.findBySelection",
     async () => {
       const query = getSelectedText(vscode);
       await search(vscode, query);
@@ -50,7 +50,7 @@ export const activate = (context: vscode.ExtensionContext) => {
   );
 
   context.subscriptions.push(extensionFind);
-  context.subscriptions.push(extensionSearchBySelection);
+  context.subscriptions.push(extensionFindBySelection);
 };
 
 export function deactivate() {}

@@ -10,16 +10,47 @@
     "auchenberg.vscode-browser-preview"
   ],
   "activationEvents": [
-    "onCommand:extension.find"
+    "onCommand:extension.find",
+    "onCommand:extension.findBySelection"
   ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
         "command": "extension.find",
-        "title": "Let find"
+        "title": "Let find",
+        "icon": "vs-search",
+        "category": "Search"
+      },
+      {
+        "command": "extension.findBySelection",
+        "title": "Let find by selection",
+        "icon": "vs-search",
+        "category": "Search"
       }
-    ]
+    ],
+    "keybindings": [
+      {
+        "command": "extension.find",
+        "key": "ctrl+l+f",
+        "mac": "cmd+l+f"
+      },
+      {
+        "command": "extension.findBySelection",
+        "key": "ctrl+shift+l+f",
+        "mac": "cmd+shift+l+f"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "extension.findBySelection",
+          "alt": "extension.find",
+          "group": "z_commands",
+          "when": "editorHasSelection"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
