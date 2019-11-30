@@ -13,9 +13,45 @@ fetch("/getData")
           d.time = timeago.format(d.time);
         });
 
-        console.log(data);
+        var summary = [];
+
+        const cumulate = arr => {
+          for (let i = 0; i < arr.length; i++) {
+            let entry = arr[i];
+
+            let needAdd = true;
+            for (let j = 0; j < summary.length; j++) {
+              console.log(entry);
+              if (entry.name === summary[j].name) {
+                summary[j].value += entry.value;
+                needAdd = false;
+                break;
+              }
+            }
+
+            if (needAdd) {
+              summary.push({
+                name: entry.name,
+                value: entry.value
+              });
+            }
+          }
+        };
+
+        var output = [];
+
+        for (let i = 0; i < data.length; i++) {
+          cumulate(data[i].entries);
+          output.push({
+            entries: JSON.parse(JSON.stringify(summary)),
+            time: data[i].time
+          });
+        }
+
+        console.log("summary", summary);
+        console.log("output", output);
         const container = document.querySelector("#container");
-        const stats = new BarChartRace(container, data);
+        const stats = new BarChartRace(container, output);
 
         stats.start();
         window.addEventListener("resize", () => stats.resize());

@@ -32,7 +32,6 @@ app.use("/static", express.static(__dirname + "/public"));
 initModules(app);
 
 app.post("/addStatistics", (req: any, res: any) => {
-  console.log(req.body.time);
   if (req.body.time && req.body.name && req.body.value) {
     let flag = false;
     for (let i = 0; i < configuration.items.length; i++) {
