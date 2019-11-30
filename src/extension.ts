@@ -1,5 +1,5 @@
 import * as vscode from "vscode";
-import { openBrowser } from "./helpers/browser.helper";
+
 import {
   findCommand,
   search,
