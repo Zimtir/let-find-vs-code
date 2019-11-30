@@ -1,6 +1,5 @@
 var cors = require("cors");
 var morgan = require("morgan");
-
 export const normalizePort = (val: string) => {
   var port = parseInt(val, 10);
 

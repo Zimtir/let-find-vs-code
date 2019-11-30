@@ -3,7 +3,7 @@ import EntryModel from "./entry.model";
 
 export default class DatasetModel {
   constructor(obj: DatasetModel) {
-    this.time = timeago.format(obj.time);
+    this.time = obj.time;
     this.entries = obj.entries;
   }
 

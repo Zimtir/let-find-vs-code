@@ -164,7 +164,7 @@ class BarChartRace {
     this.ctx.font = `${dateLabelFontSize}px Arial`;
     this.ctx.fillStyle = "grey";
     this.ctx.fillText(
-      this.data[this.pos].year,
+      this.data[this.pos].time,
       this.fieldWidth - xOffset,
       this.canvasHeight - yOffSet
     );
