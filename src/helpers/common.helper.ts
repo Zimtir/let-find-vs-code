@@ -1,5 +1,3 @@
-import axios from "axios";
-
 export const checkObj = (obj: any) => {
   return obj !== undefined && obj !== null;
 };

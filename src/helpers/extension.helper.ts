@@ -36,7 +36,6 @@ export const search = async (vscode: any, query: string) => {
     const sources: Source[] = getSources(query);
     const subsources: Source[] = [];
 
-    // TODO (Parser): Add the call of the request
     const sourcePromises = sources.map(async source => {
       try {
         if (source.find) {
