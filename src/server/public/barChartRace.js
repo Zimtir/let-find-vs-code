@@ -176,31 +176,15 @@ class BarChartRace {
     const maxValue = this.sorted[0].value;
     const firstN = this.sorted.slice(0, this.maxCount);
 
-    // TODO: refactor rulers
-
-    // if (this.steps) {
-    //   const lastStep = this.steps[this.steps.length - 1];
-    //   const oneStepBeforeLast = this.steps[this.steps.length - 2];
-    //   const prevDiff = lastStep - oneStepBeforeLast;
-
-    //   if (lastStep + prevDiff <= maxValue * 0.9) {
-    //     const rulerStep = lastStep + prevDiff;
-    //     // this.steps = this.steps.slice(1, this.steps.length);
-    //     this.steps.push(rulerStep);
-    //   }
-    // } else {
-    //   const rulerStep = Math.floor(maxValue * 0.9 / 4);
-    //   const min = Math.floor(maxValue * 0.15);
-    //   this.steps = [min, min + rulerStep * 1.5, min + rulerStep * 3];
-    // }
-
-    // this._drawRulers(maxValue);
-
     this._drawDateLabel();
 
-    const drawFunction = ({ name, value }, idx) =>
+    const drawFunction = ({ name, value }, idx) => {
       this._drawBar(name, value, idx, maxValue);
-    firstN.forEach(drawFunction);
+    };
+
+    for (let i = 0; i < firstN.length; i++) {
+      drawFunction({ name: firstN[i].name, value: firstN[i].value }, i);
+    }
   }
 
   _tick() {

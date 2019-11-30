@@ -67,7 +67,7 @@ const mockAddStat = () => {
   }
 
   for (let i = 0; i < 100; i++) {
-    addStat(`name ${getRandomInt(0, 10)}`, getRandomInt(0, 1000));
+    addStat(`name ${getRandomInt(0, 10)}`, getRandomInt(0, 10));
   }
 };
 
