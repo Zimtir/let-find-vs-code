@@ -73,7 +73,6 @@ app.post("/addStatistics", (req: any, res: any) => {
     }
   }
 
-  console.log(configuration.items);
   res.send(configuration);
 });
 
