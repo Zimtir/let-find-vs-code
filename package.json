@@ -58,7 +58,7 @@
     "watch": "tsc -watch -p ./",
     "pretest": "npm run compile",
     "test": "node ./out/test/runTest.js",
-    "backend": "nodemon --watch 'server/**/*.ts' --exec 'ts-node' server/app.ts"
+    "backend": "nodemon --watch 'src/server/**/*.ts' --exec 'ts-node' src/server/app.ts"
   },
   "devDependencies": {
     "@types/express": "^4.17.2",

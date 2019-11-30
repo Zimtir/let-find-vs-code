@@ -3,7 +3,6 @@ var app = express();
 
 import { createServer } from "http";
 import AppConfiguration from "./helpers/dataset.helper";
-import { getPage } from "./helpers/html.helper";
 import DatasetModel from "./models/dataset.model";
 import EntryModel from "./models/entry.model";
 var configuration = AppConfiguration.getInstance();
