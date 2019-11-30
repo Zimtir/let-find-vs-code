@@ -57,22 +57,39 @@
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
     "pretest": "npm run compile",
-    "test": "node ./out/test/runTest.js"
+    "test": "node ./out/test/runTest.js",
+    "backend": "nodemon --watch 'server/**/*.ts' --exec 'ts-node' server/app.ts"
   },
   "devDependencies": {
+    "@types/express": "^4.17.2",
     "@types/glob": "^7.1.1",
     "@types/mocha": "^5.2.7",
     "@types/node": "^12.11.7",
     "@types/vscode": "^1.40.0",
     "glob": "^7.1.5",
     "mocha": "^6.2.2",
-    "typescript": "^3.6.4",
+    "nodemon": "^2.0.1",
     "tslint": "^5.20.0",
-    "vscode-test": "^1.2.2"
+    "typescript": "^3.6.4",
+    "vscode-test": "^1.2.2",
+    "@types/cookie-parser": "^1.4.2",
+    "@types/express-session": "^1.15.14",
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "rimraf": "^2.6.3",
+    "ts-node": "^8.4.1"
   },
   "dependencies": {
     "@types/request-promise-native": "^1.0.17",
     "axios": "^0.19.0",
-    "request-promise-native": "^1.0.8"
+    "body-parser": "^1.18.1",
+    "cookie-parser": "^1.4.4",
+    "cors": "^2.8.4",
+    "express": "^4.17.1",
+    "express-es6-template-engine": "^2.2.0",
+    "express-list-endpoints": "^4.0.1",
+    "morgan": "^1.8.2",
+    "request-promise-native": "^1.0.8",
+    "timeago.js": "^4.0.1"
   }
 }
