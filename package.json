@@ -1,10 +1,10 @@
 {
-  "name": "let-find-vs-code-extension",
-  "displayName": "let-find-vs-code-extension",
+  "name": "let-find",
+  "displayName": "Let Find",
   "description": "Extension with the search support for Visual Studio Code",
   "version": "0.0.5",
   "publisher": "MaratZimnurov",
-  "repository": "https://github.com/Zimtir/let-find-vs-code",
+  "repository": "https://github.com/Zimtir/let-find",
   "engines": {
     "vscode": "^1.40.0"
   },

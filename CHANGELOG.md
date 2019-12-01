@@ -28,3 +28,4 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 - Add logo
 - Add preview gif
+- Rename project
