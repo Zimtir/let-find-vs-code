@@ -8,6 +8,7 @@
   "engines": {
     "vscode": "^1.40.0"
   },
+  "icon": "assets/logo-128x128.png",
   "extensionDependency": [
     "auchenberg.vscode-browser-preview"
   ],
