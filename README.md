@@ -4,6 +4,20 @@ Try to search inside VS Code right now.
 
 ![Let find preview](https://raw.githubusercontent.com/Zimtir/let-find/master/assets/preview.gif "Let find preview")
 
+## Shortcutes
+
+- _command_: find
+
+  _win_: ctrl+l+f
+
+  _mac_: cmd+l+f
+
+- _command_: extension.findBySelection
+
+  _key_: ctrl+shift+l+f
+
+  _mac_: cmd+shift+l+f
+
 ## If not works
 
 Try to install recommended extensions:
