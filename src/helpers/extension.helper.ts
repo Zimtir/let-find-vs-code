@@ -42,7 +42,9 @@ export const search = async (vscode: any, query: string) => {
           const sourceResponses = await source.find(query);
           if (sourceResponses) {
             sourceResponses.map((sourceResponse: Source) => {
-              subsources.push(sourceResponse);
+              if (checkString(sourceResponse.title)) {
+                subsources.push(sourceResponse);
+              }
             });
           }
         }

@@ -29,3 +29,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 - Add logo
 - Add preview gif
 - Rename project
+
+## [0.0.6]
+
+- Add StackOverflow support
