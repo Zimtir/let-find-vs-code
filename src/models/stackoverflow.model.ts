@@ -1,5 +1,6 @@
 import Source from "../interfaces/source.interface";
 import axios from "axios";
+import { checkOrEmpty } from "../helpers/common.helper";
 
 export default class StackOverflowModel implements Source {
   constructor(query: string) {
@@ -30,7 +31,7 @@ export default class StackOverflowModel implements Source {
         return {
           title: `${index}: ${result.is_answered ? "✅" : "🛠"} ${
             result.score
-          } 🎲${result.answer_count} 🚦${decodeURIComponent(
+          } 😃 ${result.answer_count} ➡ ${checkOrEmpty(
             result.title
           )} 🏷️${result.tags.join(",")}`,
           url: result.link

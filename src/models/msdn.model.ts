@@ -2,6 +2,7 @@ import Source from "../interfaces/source.interface";
 import axios from "axios";
 import { log } from "../helpers/log.helper";
 import * as timeago from "timeago.js";
+import { checkOrEmpty } from "../helpers/common.helper";
 
 export default class MSDNModel implements Source {
   constructor(query: string) {
@@ -17,18 +18,22 @@ export default class MSDNModel implements Source {
     const response = await axios.get(url);
 
     var index = 0;
-    const sources = response.data.results.map(
-      (result: any): Source => {
-        const formattedDate = timeago.format(result.lastUpdatedDate);
-        index++;
-        return {
-          title: `${index}:📚 ${result.descriptions.length} 😃 📅 ${formattedDate} ➡ ${result.description}`,
-          url: result.url,
-          updated: result.lastUpdatedDate,
-          description: result.description
-        };
-      }
-    );
+    const sources: Source[] = [];
+
+    response.data.results.map((result: any) => {
+      const formattedDate = timeago.format(result.lastUpdatedDate);
+      index++;
+      sources.push({
+        title: `${index}:📚 ${
+          result.descriptions ? result.descriptions.length : ""
+        } 😃 📅 ${formattedDate} ➡ ${checkOrEmpty(
+          result.title
+        )} ➡ ${checkOrEmpty(result.description)}`,
+        url: result.url,
+        updated: result.lastUpdatedDate,
+        description: result.description
+      });
+    });
     return sources;
   }
 }
