@@ -6,4 +6,4 @@ Try to search inside VS Code right now.
 
 ## Marketplace link
 
-https://marketplace.visualstudio.com/items?itemName=MaratZimnurov.let-find-vs-code-extension
+https://marketplace.visualstudio.com/items?itemName=MaratZimnurov.let-find
