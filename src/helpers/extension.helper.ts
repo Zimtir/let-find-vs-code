@@ -1,105 +1,123 @@
-import { checkString } from "./common.helper";
-import { log } from "./log.helper";
-import Dictionary from "./dictionary.helper";
-import { openBrowser } from "./browser.helper";
 import Source from "../interfaces/source.interface";
-import { getSources } from "./source.helper";
 
-export const findCommand = (vscode: any) => {
-  vscode.commands.getCommands(true).then(
-    (cmds: any) => {
-      log("success");
-    },
-    () => {
-      log("failed");
-    }
-  );
-};
+import CommonHelper from "./common.helper";
+import LogHelper from "./log.helper";
+import BrowserHelper from "./browser.helper";
+import SourceHelper from "./source.helper";
+import DictionaryHelper from "./dictionary.helper";
 
-export const promptWithSearch = async (vscode: any) => {
-  const alreadySelectedText = getSelectedText(vscode);
+export default class ExtensionHelper {
+  commonHelper: CommonHelper;
+  browserHelper: BrowserHelper;
+  sourceHelper: SourceHelper;
+  logHelper: LogHelper;
+  dictionaryHelper: DictionaryHelper;
 
-  const query = await vscode.window.showInputBox({
-    ignoreFocusOut: alreadySelectedText === "",
-    placeHolder: Dictionary.firstBoxPlaceholder,
-    value: alreadySelectedText,
-    valueSelection: [0, alreadySelectedText.length + 1]
-  });
+  vscode: any;
 
-  await search(vscode, query!);
-};
+  constructor(vscode: any) {
+    this.vscode = vscode;
+    this.logHelper = new LogHelper();
+    this.commonHelper = new CommonHelper();
+    this.sourceHelper = new SourceHelper();
+    this.dictionaryHelper = new DictionaryHelper();
+    this.browserHelper = new BrowserHelper(this.vscode);
+  }
 
-export const search = async (vscode: any, query: string) => {
-  if (checkString(query)) {
-    log(`${Dictionary.startQuery} ${query}`);
-
-    const sources: Source[] = getSources(query);
-    const subsources: Source[] = [];
-
-    const sourcePromises = sources.map(async source => {
-      try {
-        if (source.find) {
-          const sourceResponses = await source.find(query);
-          if (sourceResponses) {
-            sourceResponses.map((sourceResponse: Source) => {
-              if (checkString(sourceResponse.title)) {
-                subsources.push(sourceResponse);
-              }
-            });
-          }
-        }
-      } catch (err) {
-        log(err);
+  findCommand = () => {
+    this.vscode.commands.getCommands(true).then(
+      (cmds: any) => {
+        this.logHelper.log(this.dictionaryHelper.success);
+      },
+      () => {
+        this.logHelper.log(this.dictionaryHelper.failed);
       }
+    );
+  };
+
+  promptWithSearch = async () => {
+    const alreadySelectedText = this.getSelectedText();
+
+    const query = await this.vscode.window.showInputBox({
+      ignoreFocusOut: alreadySelectedText === "",
+      placeHolder: this.dictionaryHelper.firstBoxPlaceholder,
+      value: alreadySelectedText,
+      valueSelection: [0, alreadySelectedText.length + 1]
     });
 
-    await Promise.all(sourcePromises);
+    await this.search(query!);
+  };
 
-    sources.push(...subsources);
+  search = async (query: string) => {
+    if (this.commonHelper.checkString(query)) {
+      this.logHelper.log(`${this.dictionaryHelper.startQuery} ${query}`);
 
-    const selectedTitle = await vscode.window.showQuickPick(
-      sources.map(source => source.title),
-      { canPickMany: false }
-    );
+      const sources: Source[] = this.sourceHelper.getSources(query);
+      const subsources: Source[] = [];
 
-    const selectedSource = sources.find(
-      source => source.title === selectedTitle
-    );
+      const sourcePromises = sources.map(async source => {
+        try {
+          if (source.find) {
+            const sourceResponses = await source.find(query);
+            if (sourceResponses) {
+              sourceResponses.map((sourceResponse: Source) => {
+                if (this.commonHelper.checkString(sourceResponse.title)) {
+                  subsources.push(sourceResponse);
+                }
+              });
+            }
+          }
+        } catch (err) {
+          this.logHelper.log(err);
+        }
+      });
 
-    if (selectedSource) {
-      openBrowser(vscode, selectedSource.url);
+      await Promise.all(sourcePromises);
+
+      sources.push(...subsources);
+
+      const selectedTitle = await this.vscode.window.showQuickPick(
+        sources.map(source => source.title),
+        { canPickMany: false }
+      );
+
+      const selectedSource = sources.find(
+        source => source.title === selectedTitle
+      );
+
+      if (selectedSource) {
+        this.browserHelper.openBrowser(selectedSource.url);
+      }
     }
-  }
+  };
 
-  return;
-};
-
-export const getSelectedText = (vscode: any): string => {
-  const editor = vscode.window.activeTextEditor;
-  if (!editor) {
-    return "";
-  }
-
-  const document = editor.document;
-  const eol = document.eol === 1 ? "\n" : "\r\n";
-  let result: string = "";
-  const selectedTextLines = editor.selections.map((selection: any) => {
-    if (
-      selection.start.line === selection.end.line &&
-      selection.start.character === selection.end.character
-    ) {
-      const range = document.lineAt(selection.start).range;
-      const text = editor.document.getText(range);
-      return `${text}${eol}`;
+  getSelectedText = (): string => {
+    const editor = this.vscode.window.activeTextEditor;
+    if (!editor) {
+      return "";
     }
 
-    return editor.document.getText(selection);
-  });
+    const document = editor.document;
+    const eol = document.eol === 1 ? "\n" : "\r\n";
+    let result: string = "";
+    const selectedTextLines = editor.selections.map((selection: any) => {
+      if (
+        selection.start.line === selection.end.line &&
+        selection.start.character === selection.end.character
+      ) {
+        const range = document.lineAt(selection.start).range;
+        const text = editor.document.getText(range);
+        return `${text}${eol}`;
+      }
 
-  if (selectedTextLines.length > 0) {
-    result = selectedTextLines[0];
-  }
+      return editor.document.getText(selection);
+    });
 
-  result = result.trim();
-  return result;
-};
+    if (selectedTextLines.length > 0) {
+      result = selectedTextLines[0];
+    }
+
+    result = result.trim();
+    return result;
+  };
+}

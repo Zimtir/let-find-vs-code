@@ -1,56 +1,31 @@
 import * as vscode from "vscode";
 
-import {
-  findCommand,
-  search,
-  getSelectedText,
-  promptWithSearch
-} from "./helpers/extension.helper";
-import { log } from "./helpers/log.helper";
-import Dictionary from "./helpers/dictionary.helper";
+import ExtensionHelper from "./helpers/extension.helper";
+import LogHelper from "./helpers/log.helper";
+import CommandHelper from "./helpers/command.helper";
+import DictionaryHelper from "./helpers/dictionary.helper";
 
-export const activate = (context: vscode.ExtensionContext) => {
-  log(Dictionary.extensionIsActive);
+export class Extension {
+  logHelper: LogHelper;
+  extensionHelper: ExtensionHelper;
+  commandHelper: CommandHelper;
+  dictionaryHelper: DictionaryHelper;
 
-  const extensionFind = vscode.commands.registerCommand(
-    "extension.find",
-    async () => {
-      vscode.window.showInformationMessage(Dictionary.startMessage);
+  constructor() {
+    this.logHelper = new LogHelper();
+    this.dictionaryHelper = new DictionaryHelper();
+    this.extensionHelper = new ExtensionHelper(vscode);
+    this.commandHelper = new CommandHelper(vscode);
+  }
 
-      const browser = vscode.extensions.getExtension(
-        Dictionary.browserExtensionName
-      );
+  activate = (context: vscode.ExtensionContext) => {
+    this.logHelper.log(this.dictionaryHelper.extensionIsActive);
 
-      const extensionActivated = () => {
-        log(Dictionary.extensionHasActived);
-        findCommand(vscode);
-      };
+    const commands = this.commandHelper.getCommands();
+    commands.map(command => {
+      this.commandHelper.activate(context, command);
+    });
+  };
 
-      const extensionFailed = () => {
-        log(Dictionary.extensionHasFailed);
-      };
-
-      if (browser) {
-        if (browser.isActive == false) {
-          browser.activate().then(extensionActivated, extensionFailed);
-        } else {
-        }
-
-        await promptWithSearch(vscode);
-      }
-    }
-  );
-
-  const extensionFindBySelection = vscode.commands.registerCommand(
-    "extension.findBySelection",
-    async () => {
-      const query = getSelectedText(vscode);
-      await search(vscode, query);
-    }
-  );
-
-  context.subscriptions.push(extensionFind);
-  context.subscriptions.push(extensionFindBySelection);
-};
-
-export function deactivate() {}
+  deactivate: Function = () => {};
+}

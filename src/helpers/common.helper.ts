@@ -1,11 +1,15 @@
-export const checkObj = (obj: any) => {
-  return obj !== undefined && obj !== null;
-};
+export default class CommonHelper {
+  checkString = (str: string): boolean => {
+    return (
+      this.checkObj(str) && str.length > 0 && str !== "" && str.trim() !== ""
+    );
+  };
 
-export const checkString = (str: string) => {
-  return checkObj(str) && str.length > 0 && str !== "" && str.trim() !== "";
-};
+  checkObj = (obj: any): boolean => {
+    return obj !== undefined && obj !== null;
+  };
 
-export const checkOrEmpty = (str: string) => {
-  return checkString(str) ? str : "";
-};
+  checkOrEmpty = (str: string): string => {
+    return this.checkString(str) ? str : "";
+  };
+}

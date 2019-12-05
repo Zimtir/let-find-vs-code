@@ -1,37 +1,49 @@
-import Source from "../interfaces/source.interface";
 import axios from "axios";
-import { log } from "../helpers/log.helper";
 import * as timeago from "timeago.js";
-import { checkOrEmpty } from "../helpers/common.helper";
+
+import Source from "../interfaces/source.interface";
+
+import LogHelper from "../helpers/log.helper";
+import CommonHelper from "../helpers/common.helper";
 
 export default class MSDNModel implements Source {
+  logHelper: LogHelper;
+  commonHelper: CommonHelper;
+
   constructor(query: string) {
     this.title = `🔎 Search MSDN: ${query}`;
     this.url = "https://docs.microsoft.com";
+
+    this.logHelper = new LogHelper();
+    this.commonHelper = new CommonHelper();
   }
   title: string;
   url: string;
 
   async find(search: string): Promise<Source[]> {
     const url = `https://docs.microsoft.com/api/search?search=${search}&locale=en-us&top=10`;
-    log(url);
+    this.logHelper.log(url);
+
     const response = await axios.get(url);
 
-    var index = 0;
+    let index = 0;
     const sources: Source[] = [];
 
     response.data.results.map((result: any) => {
       const formattedDate = timeago.format(result.lastUpdatedDate);
       index++;
+
+      let title = this.commonHelper.checkOrEmpty(result.title);
+      let description = this.commonHelper.checkOrEmpty(result.description);
+      let count = result.descriptions ? result.descriptions.length : "";
+
       sources.push({
-        title: `${index}:📚 ${
-          result.descriptions ? result.descriptions.length : ""
-        } 😃 📅 ${formattedDate} ➡ ${checkOrEmpty(
-          result.title
-        )} ➡ ${checkOrEmpty(result.description)}`,
+        title: `${index}:📚 ${count} 😃 📅 ${formattedDate} ➡ ${title} ➡ ${description}`,
         url: result.url,
         updated: result.lastUpdatedDate,
-        description: result.description
+        description: result.description,
+        logHelper: this.logHelper,
+        commonHelper: this.commonHelper
       });
     });
     return sources;

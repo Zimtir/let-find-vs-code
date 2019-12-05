@@ -1,7 +1,9 @@
-const DEBUG = false;
+export default class LogHelper {
+  DEBUG: boolean = false;
 
-export const log = (param: any) => {
-  if (DEBUG) {
-    console.log(param);
-  }
-};
+  log = (param: any) => {
+    if (this.DEBUG) {
+      console.log(param);
+    }
+  };
+}
