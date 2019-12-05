@@ -1,8 +1,12 @@
+[![](https://vsmarketplacebadge.apphb.com/version-short/MaratZimnurov.let-find.svg)](https://marketplace.visualstudio.com/items?itemName=MaratZimnurov.let-find)
+[![](https://vsmarketplacebadge.apphb.com/downloads-short/MaratZimnurov.let-find.svg)](https://marketplace.visualstudio.com/items?itemName=MaratZimnurov.let-find)
+[![](https://vsmarketplacebadge.apphb.com/rating-short/MaratZimnurov.let-find.svg)](https://marketplace.visualstudio.com/items?itemName=MaratZimnurov.let-find)
+
 # **Let find** is Visual Studio Code Extension
 
 Try to search inside VS Code right now.
 
-![Let find preview](https://raw.githubusercontent.com/Zimtir/let-find/master/assets/preview.gif "Let find preview")
+![Let find preview](https://raw.githubusercontent.com/Zimtir/let-find/master/assets/preview.gif 'Let find preview')
 
 ## Shortcutes
 
