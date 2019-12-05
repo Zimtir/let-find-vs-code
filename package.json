@@ -73,6 +73,8 @@
   "scripts": {
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
+    "package": "vsce package",
+    "publish": "vsce publish -p %PUBLISHER_TOKEN%",
     "pbl": "vsce package & vsce publish"
   },
   "devDependencies": {

@@ -1,5 +1,5 @@
 on: push
-name: 'Release Vscode Plugin'
+name: 'Release Extension'
 jobs:
   npmInstall:
     name: npm install
@@ -14,9 +14,9 @@ jobs:
         uses: actions/bin/filter@master
         with:
           args: branch master
-      - name: Vscode release plugin
-        uses: JCofman/vscodeaction@master
+      - name: publish
+        uses: actions/npm@master
         env:
           PUBLISHER_TOKEN: ${{ secrets.PUBLISHER_TOKEN }}
         with:
-          args: publish -p $PUBLISHER_TOKEN
+          args: install && install -g vsce && run package && run publish
