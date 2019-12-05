@@ -1,9 +1,15 @@
 export default class LogHelper {
   DEBUG: boolean = false;
 
-  log = (param: any) => {
+  /**
+   * Logs the any data to the prepared output.
+   *
+   * @param data - The any obj
+   *
+   */
+  log = (data: any) => {
     if (this.DEBUG) {
-      console.log(param);
+      console.log(data);
     }
   };
 }

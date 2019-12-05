@@ -25,23 +25,6 @@ export default class FindCommand implements Command {
         this.dictionaryHelper.startMessage
       );
 
-      const browser = this.vscode.extensions.getExtension(
-        this.dictionaryHelper.browserExtensionName
-      );
-
-      if (browser && !browser.isActive) {
-        browser
-          .activate()
-          .then(() => {
-            this.logHelper.log(this.dictionaryHelper.extensionHasActived);
-            this.extensionHelper.findCommand();
-          })
-          .catch((err: any) => {
-            this.logHelper.log(this.dictionaryHelper.extensionHasFailed);
-            this.logHelper.log(err);
-          });
-      }
-
       await this.extensionHelper.promptWithSearch();
     };
   }

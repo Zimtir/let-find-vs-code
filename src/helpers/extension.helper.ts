@@ -24,17 +24,10 @@ export default class ExtensionHelper {
     this.browserHelper = new BrowserHelper(this.vscode);
   }
 
-  findCommand = () => {
-    this.vscode.commands.getCommands(true).then(
-      (cmds: any) => {
-        this.logHelper.log(this.dictionaryHelper.success);
-      },
-      () => {
-        this.logHelper.log(this.dictionaryHelper.failed);
-      }
-    );
-  };
-
+  /**
+   * Opens the pallete and search the query in the available sources.
+   *
+   */
   promptWithSearch = async () => {
     const alreadySelectedText = this.getSelectedText();
 
@@ -48,6 +41,12 @@ export default class ExtensionHelper {
     await this.search(query!);
   };
 
+  /**
+   * Looking for the query of user.
+   *
+   * @param query - The query like string
+   *
+   */
   search = async (query: string) => {
     if (this.commonHelper.checkString(query)) {
       this.logHelper.log(`${this.dictionaryHelper.startQuery} ${query}`);
@@ -91,6 +90,12 @@ export default class ExtensionHelper {
     }
   };
 
+  /**
+   * Returns the selected text inside editor.
+   *
+   * @returns The string from the selection
+   *
+   */
   getSelectedText = (): string => {
     const editor = this.vscode.window.activeTextEditor;
     if (!editor) {
@@ -99,7 +104,9 @@ export default class ExtensionHelper {
 
     const document = editor.document;
     const eol = document.eol === 1 ? "\n" : "\r\n";
+
     let result: string = "";
+
     const selectedTextLines = editor.selections.map((selection: any) => {
       if (
         selection.start.line === selection.end.line &&

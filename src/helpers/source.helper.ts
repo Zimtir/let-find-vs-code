@@ -5,6 +5,13 @@ import GoogleModel from "../models/google.model";
 import StackOverflowModel from "../models/stackoverflow.model";
 
 export default class SourceHelper {
+  /**
+   * Returns the list of the sources.
+   *
+   * @param query - The query like the any string
+   * @returns The list of all available sources with a some the founded results
+   *
+   */
   getSources = (query: string): Source[] => {
     let output: Source[] = [];
 
