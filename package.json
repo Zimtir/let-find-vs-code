@@ -5,6 +5,7 @@
   "version": "0.0.7",
   "publisher": "MaratZimnurov",
   "repository": "https://github.com/Zimtir/let-find",
+  "license": "SEE LICENSE IN LICENSE",
   "engines": {
     "vscode": "^1.40.0"
   },
@@ -72,7 +73,7 @@
   "scripts": {
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
-    "pbl": "vsce package"
+    "pbl": "vsce package & vsce publish"
   },
   "devDependencies": {
     "@types/vscode": "^1.40.0",
