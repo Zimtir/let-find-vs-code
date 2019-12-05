@@ -16,6 +16,20 @@
     "onCommand:extension.find",
     "onCommand:extension.findBySelection"
   ],
+  "galleryBanner": {
+    "color": "#8647ae",
+    "theme": "dark"
+  },
+  "keywords": [
+    "msdn",
+    "google",
+    "stackoverflow",
+    "search",
+    "search inside vs code",
+    "google inside vs code",
+    "msdn inside vs code",
+    "stackoverflow inside vs code"
+  ],
   "main": "./out/index.js",
   "contributes": {
     "commands": [

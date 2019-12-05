@@ -1,5 +1,5 @@
 export default class LogHelper {
-  DEBUG: boolean = false;
+  DEBUG: boolean = false
 
   /**
    * Logs the any data to the prepared output.
@@ -9,7 +9,7 @@ export default class LogHelper {
    */
   log = (data: any) => {
     if (this.DEBUG) {
-      console.log(data);
+      console.log(data)
     }
-  };
+  }
 }

@@ -37,3 +37,5 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ## [0.0.7]
 
 - Code refactoring
+- Add comments like TSDoc
+- Add .pretierrc

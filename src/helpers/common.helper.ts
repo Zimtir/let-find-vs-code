@@ -8,9 +8,9 @@ export default class CommonHelper {
    */
   checkString = (str: string): boolean => {
     return (
-      this.checkObj(str) && str.length > 0 && str !== "" && str.trim() !== ""
-    );
-  };
+      this.checkObj(str) && str.length > 0 && str !== '' && str.trim() !== ''
+    )
+  }
 
   /**
    * Returns the completness of the object.
@@ -20,8 +20,8 @@ export default class CommonHelper {
    *
    */
   checkObj = (obj: any): boolean => {
-    return obj !== undefined && obj !== null;
-  };
+    return obj !== undefined && obj !== null
+  }
 
   /**
    * Returns the input string or empty string.
@@ -31,6 +31,6 @@ export default class CommonHelper {
    *
    */
   checkOrEmpty = (str: string): string => {
-    return this.checkString(str) ? str : "";
-  };
+    return this.checkString(str) ? str : ''
+  }
 }

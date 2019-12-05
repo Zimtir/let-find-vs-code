@@ -1,6 +1,6 @@
-import { Extension } from "./extension";
+import { Extension } from './extension'
 
-const extension = new Extension();
+const extension = new Extension()
 
 /**
  * Returns the activate function for extension.
@@ -9,7 +9,7 @@ const extension = new Extension();
  * @returns The activate function
  *
  */
-export const activate = extension.activate;
+export const activate = extension.activate
 
 /**
  * Returns the deactivate function for extension.
@@ -17,4 +17,4 @@ export const activate = extension.activate;
  * @returns The deactivate function
  *
  */
-export const defactivate = extension.deactivate;
+export const defactivate = extension.deactivate

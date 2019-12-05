@@ -1,18 +1,18 @@
-import DictionaryHelper from "./dictionary.helper";
-import LogHelper from "./log.helper";
-import ExtensionHelper from "./extension.helper";
+import DictionaryHelper from './dictionary.helper'
+import LogHelper from './log.helper'
+import ExtensionHelper from './extension.helper'
 
 export default class BrowserHelper {
-  vscode: any;
-  dictionaryHelper: DictionaryHelper;
-  logHelper: LogHelper;
-  extensionHelper: ExtensionHelper;
+  vscode: any
+  dictionaryHelper: DictionaryHelper
+  logHelper: LogHelper
+  extensionHelper: ExtensionHelper
 
   constructor(vscode: any) {
-    this.vscode = vscode;
-    this.dictionaryHelper = new DictionaryHelper();
-    this.logHelper = new LogHelper();
-    this.extensionHelper = new ExtensionHelper(this.vscode);
+    this.vscode = vscode
+    this.dictionaryHelper = new DictionaryHelper()
+    this.logHelper = new LogHelper()
+    this.extensionHelper = new ExtensionHelper(this.vscode)
   }
 
   /**
@@ -22,28 +22,28 @@ export default class BrowserHelper {
    *
    */
   checkBrowser = (): boolean => {
-    let result = false;
+    let result = false
 
     const browser = this.vscode.extensions.getExtension(
       this.dictionaryHelper.browserExtensionName
-    );
+    )
 
     if (browser && !browser.isActive) {
       result = browser
         .activate()
         .then(() => {
-          this.logHelper.log(this.dictionaryHelper.extensionHasActived);
-          return true;
+          this.logHelper.log(this.dictionaryHelper.extensionHasActived)
+          return true
         })
         .catch((err: any) => {
-          this.logHelper.log(this.dictionaryHelper.extensionHasFailed);
-          this.logHelper.log(err);
-          return false;
-        });
+          this.logHelper.log(this.dictionaryHelper.extensionHasFailed)
+          this.logHelper.log(err)
+          return false
+        })
     }
 
-    return result;
-  };
+    return result
+  }
 
   /**
    * Opens browser on the specific URL.
@@ -52,6 +52,6 @@ export default class BrowserHelper {
    *
    */
   openBrowser = (url: string) => {
-    this.vscode.commands.executeCommand("browser-preview.openPreview", url);
-  };
+    this.vscode.commands.executeCommand('browser-preview.openPreview', url)
+  }
 }

@@ -1,18 +1,18 @@
-import * as vscode from "vscode";
+import * as vscode from 'vscode'
 
-import Command from "../interfaces/command.interface";
+import Command from '../interfaces/command.interface'
 
-import FindCommand from "../commands/find.command";
-import SelectCommand from "../commands/select.command";
-import LogHelper from "./log.helper";
+import FindCommand from '../commands/find.command'
+import SelectCommand from '../commands/select.command'
+import LogHelper from './log.helper'
 
 export default class CommandHelper {
-  vscode: any;
-  logHelper: LogHelper;
+  vscode: any
+  logHelper: LogHelper
 
   constructor(vscode: any) {
-    this.vscode = vscode;
-    this.logHelper = new LogHelper();
+    this.vscode = vscode
+    this.logHelper = new LogHelper()
   }
 
   /**
@@ -22,8 +22,8 @@ export default class CommandHelper {
    *
    */
   getCommands = (): Command[] => {
-    return [new FindCommand(this.vscode), new SelectCommand(this.vscode)];
-  };
+    return [new FindCommand(this.vscode), new SelectCommand(this.vscode)]
+  }
 
   /**
    * Adds the command to the command list of VS code.
@@ -37,10 +37,10 @@ export default class CommandHelper {
       let subscription = this.vscode.commands.registerCommand(
         command.name,
         command.action
-      );
-      context.subscriptions.push(subscription);
+      )
+      context.subscriptions.push(subscription)
     } catch (err) {
-      this.logHelper.log(err);
+      this.logHelper.log(err)
     }
-  };
+  }
 }
