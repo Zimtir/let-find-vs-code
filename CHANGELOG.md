@@ -39,3 +39,8 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 - Code refactoring
 - Add comments like TSDoc
 - Add .pretierrc
+
+## [0.0.8]
+
+- Add shortcutes to readme
+- Add workflow configuration

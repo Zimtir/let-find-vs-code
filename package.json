@@ -2,7 +2,7 @@
   "name": "let-find",
   "displayName": "Let Find",
   "description": "Extension with the search support for Visual Studio Code",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "publisher": "MaratZimnurov",
   "repository": "https://github.com/Zimtir/let-find",
   "license": "SEE LICENSE IN LICENSE",
