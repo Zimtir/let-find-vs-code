@@ -10,17 +10,7 @@ Try to search inside VS Code right now.
 
 ## Shortcutes
 
-- _command_: find
-
-  _win_: ctrl+l
-
-  _mac_: cmd+l
-
-- _command_: extension.findBySelection
-
-  _key_: ctrl+shift+l
-
-  _mac_: cmd+shift+l
+![Shortcutes](https://raw.githubusercontent.com/Zimtir/let-find/master/assets/shortcutes.png 'Shortcutes')
 
 ## If not works
 
