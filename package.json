@@ -35,13 +35,13 @@
     "keybindings": [
       {
         "command": "extension.find",
-        "key": "ctrl+l+f",
-        "mac": "cmd+l+f"
+        "key": "ctrl+l",
+        "mac": "cmd+l"
       },
       {
         "command": "extension.findBySelection",
-        "key": "ctrl+shift+l+f",
-        "mac": "cmd+shift+l+f"
+        "key": "ctrl+shiƒt+l",
+        "mac": "cmd+shift+l"
       }
     ],
     "menus": {

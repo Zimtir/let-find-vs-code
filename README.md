@@ -8,15 +8,15 @@ Try to search inside VS Code right now.
 
 - _command_: find
 
-  _win_: ctrl+l+f
+  _win_: ctrl+l
 
-  _mac_: cmd+l+f
+  _mac_: cmd+l
 
 - _command_: extension.findBySelection
 
-  _key_: ctrl+shift+l+f
+  _key_: ctrl+shift+l
 
-  _mac_: cmd+shift+l+f
+  _mac_: cmd+shift+l
 
 ## If not works
 
