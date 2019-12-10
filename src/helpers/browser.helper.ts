@@ -6,13 +6,11 @@ export default class BrowserHelper {
   vscode: any
   dictionaryHelper: DictionaryHelper
   logHelper: LogHelper
-  extensionHelper: ExtensionHelper
 
   constructor(vscode: any) {
     this.vscode = vscode
     this.dictionaryHelper = new DictionaryHelper()
     this.logHelper = new LogHelper()
-    this.extensionHelper = new ExtensionHelper(this.vscode)
   }
 
   /**

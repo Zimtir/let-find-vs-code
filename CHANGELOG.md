@@ -44,3 +44,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 - Add shortcutes to readme
 - Add workflow configuration
+
+## [0.0.9]
+
+- Recursive fix
