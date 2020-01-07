@@ -30,7 +30,7 @@ https://marketplace.visualstudio.com/items?itemName=MaratZimnurov.let-find
 
 ## TODO
 
-- Custom configurations
-- Tests
-- User statistics
-- User history
+- Custom configurations (Sort, Count, Order)
+- Tests (Unit)
+- User history (Latest queries with dates)
+- System of custom searchboxes
