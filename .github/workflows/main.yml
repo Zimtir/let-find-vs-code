@@ -1,7 +1,4 @@
 on: push
-name: 'Publish a new version'
-description: 'Pack & Publish a new version of extension to Marketplace'
-author: 'Marat Zimnurov'
 jobs:
   build:
     runs-on: ubuntu-latest
