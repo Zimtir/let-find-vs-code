@@ -32,5 +32,6 @@ https://marketplace.visualstudio.com/items?itemName=MaratZimnurov.let-find
 
 - Custom configurations (Sort, Count, Order)
 - Tests (Unit)
+- Setup GitHub Actions
 - User history (Latest queries with dates)
 - System of custom searchboxes

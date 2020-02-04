@@ -1,6 +1,5 @@
 import DictionaryHelper from './dictionary.helper'
 import LogHelper from './log.helper'
-import ExtensionHelper from './extension.helper'
 
 export default class BrowserHelper {
   vscode: any

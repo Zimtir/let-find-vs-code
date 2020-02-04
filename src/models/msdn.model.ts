@@ -1,5 +1,9 @@
 import axios from 'axios'
-import * as timeago from 'timeago.js'
+
+import TimeAgo = require('javascript-time-ago')
+import en = require('javascript-time-ago/locale/en')
+TimeAgo.addLocale(en)
+const timeAgo = new TimeAgo('en-US')
 
 import Source from '../interfaces/source.interface'
 
@@ -30,7 +34,7 @@ export default class MSDNModel implements Source {
     const sources: Source[] = []
 
     response.data.results.map((result: any) => {
-      const formattedDate = timeago.format(result.lastUpdatedDate)
+      const formattedDate = timeAgo.format(result.lastUpdatedDate)
       index++
 
       let title = this.commonHelper.checkOrEmpty(result.title)

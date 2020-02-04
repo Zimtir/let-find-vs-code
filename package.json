@@ -2,7 +2,7 @@
   "name": "let-find",
   "displayName": "Let Find",
   "description": "Extension with the search support for Visual Studio Code",
-  "version": "0.0.9",
+  "version": "0.1.0",
   "publisher": "MaratZimnurov",
   "repository": "https://github.com/Zimtir/let-find",
   "license": "SEE LICENSE IN LICENSE",
@@ -78,19 +78,20 @@
     "pbl": "vsce package & vsce publish"
   },
   "devDependencies": {
+    "@types/javascript-time-ago": "^2.0.0",
+    "@types/request-promise-native": "^1.0.17",
     "@types/vscode": "^1.40.0",
-    "tslint": "^5.20.0",
-    "typescript": "^3.6.4",
-    "vscode-test": "^1.2.2",
     "babel-cli": "^6.26.0",
     "babel-preset-es2015": "^6.24.1",
     "rimraf": "^2.6.3",
-    "@types/request-promise-native": "^1.0.17"
+    "tslint": "^5.20.0",
+    "typescript": "^3.7.3",
+    "vscode-test": "^1.2.2"
   },
   "dependencies": {
     "axios": "^0.19.0",
+    "javascript-time-ago": "^2.0.6",
     "request": "^2.88.0",
-    "request-promise-native": "^1.0.8",
-    "timeago.js": "^4.0.1"
+    "request-promise-native": "^1.0.8"
   }
 }
